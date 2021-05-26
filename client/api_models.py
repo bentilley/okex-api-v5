@@ -24,8 +24,8 @@ class CandleStick:
         high: high price of the period
         low: low price of the period
         close: close price of the period
-        volatility: volatility of the period in contracts
-        volatility_in_currency: volatility of the period in currency
+        volumne: volatility of the period in contracts
+        volumne_in_currency: volatility of the period in currency
     """
 
     def __init__(
@@ -35,8 +35,8 @@ class CandleStick:
         high: float,
         low: float,
         close: float,
-        volatility: float,
-        volatility_in_currency: float,
+        volume: float,
+        volume_in_currency: float,
     ):
         # timestamp is in milliseconds -> divide by 1000 to get seconds
         self.timestamp = datetime.fromtimestamp(float(timestamp) / 1000)
@@ -44,8 +44,8 @@ class CandleStick:
         self.high = high
         self.low = low
         self.close = close
-        self.volatility = volatility
-        self.volatility_in_currency = volatility_in_currency
+        self.volume = volume
+        self.volume_in_currency = volume_in_currency
 
     @staticmethod
     def from_api_data(api_data: List[str]) -> "CandleStick":

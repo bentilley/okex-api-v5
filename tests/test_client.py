@@ -4,9 +4,9 @@
 # Distributed under terms of the MIT license.
 
 
-# import json
 import os
 import pytest
+from datetime import datetime
 from client import OkexClient
 
 
@@ -40,14 +40,13 @@ class TestOkexClient:
         assert data
 
     def test_get_candlesticks(self, client):
-        candlesticks = client.get_candlesticks(instrument_id="XCH-USDT", limit="5")
+        candlesticks = client.get_candlesticks(instrument_id="XCH-USDT", limit=5)
         assert len(candlesticks) == 5
         for candlestick in candlesticks:
-            assert candlestick.instrument_id == "XCH-USDT"
-            assert isinstance(candlestick.timestamp, int)
+            assert isinstance(candlestick.timestamp, datetime)
             assert isinstance(candlestick.open, float)
-            assert isinstance(candlestick.highest, float)
-            assert isinstance(candlestick.lowest, float)
+            assert isinstance(candlestick.high, float)
+            assert isinstance(candlestick.low, float)
             assert isinstance(candlestick.close, float)
-            assert isinstance(candlestick.volume, int)
-            assert isinstance(candlestick.volumne_currency, float)
+            assert isinstance(candlestick.volume, float)
+            assert isinstance(candlestick.volume_in_currency, float)
