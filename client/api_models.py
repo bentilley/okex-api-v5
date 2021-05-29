@@ -103,3 +103,57 @@ class Trade(ModelTimestampMixin):
             size=float(api_data["sz"]),
             trade_id=api_data["tradeId"],
         )
+
+
+@dataclass
+class Order:
+    """Simple wrapper for order data.
+
+    This is initialised from OKEX API data from the order book endpoint.
+
+    Args:
+        price: The price paid per unit of the underlying asset
+        size: The number of units of the asset
+        num_liquidated_orders: The number of liquidated orders at the price
+        num_orders: The number of orders at the price
+    """
+
+    price: float
+    size: float
+    num_liquidated_orders: int
+    num_orders: int
+
+    @staticmethod
+    def from_api_data(api_data: List[str]) -> "Order":
+        price, size, num_liquidated_orders, num_orders = api_data
+        return Order(
+            price=float(price),
+            size=float(size),
+            num_liquidated_orders=int(num_liquidated_orders),
+            num_orders=int(num_orders),
+        )
+
+
+class OrderBook(ModelTimestampMixin):
+    """Simple wrapper for order book data.
+
+    This is initialised from OKEX API data from order book returning endpoints.
+
+    Args:
+        _timestamp: Millisecond format of Unix timestamp
+        asks: The ask orders in the book, by price
+        bids: The bid orders in the book, by price
+    """
+
+    def __init__(self, timestamp: str, asks: List[Order], bids: List[Order]):
+        self._timestamp = timestamp
+        self.asks = asks
+        self.bids = bids
+
+    @staticmethod
+    def from_api_data(api_data: Dict[str, Any]) -> "OrderBook":
+        return OrderBook(
+            timestamp=api_data["ts"],
+            asks=list(map(Order.from_api_data, api_data["asks"])),
+            bids=list(map(Order.from_api_data, api_data["bids"])),
+        )

@@ -5,7 +5,7 @@
 
 
 from .api import OkexApi
-from .api_models import CandleStick, Trade
+from .api_models import CandleStick, OrderBook, Trade
 
 
 class OkexClient(OkexApi):
@@ -13,6 +13,11 @@ class OkexClient(OkexApi):
         response = super().get_candlesticks(**query_params)
         data = response["data"]
         return list(map(CandleStick.from_api_data, data))
+
+    def get_order_book(self, **query_params):
+        response = super().get_order_book(**query_params)
+        data = response["data"]
+        return OrderBook.from_api_data(data[0])
 
     def get_trades(self, **query_params):
         response = super().get_trades(**query_params)

@@ -62,3 +62,8 @@ class QueryParams(dict):
         assert isinstance(limit, int), "limit must be an integer"
         assert limit > 0, "limit must be greater than 0"
         return str(limit)
+
+    def sz(self, size):
+        assert isinstance(size, int), "size must be an integer"
+        assert size > 0, "size must be greater than 0"
+        return size

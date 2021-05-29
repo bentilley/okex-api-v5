@@ -27,6 +27,18 @@ class TestOkexClient:
             assert isinstance(candlestick.volume_in_currency, float)
 
     @pytest.mark.vcr()
+    def test_get_order_book(self, client):
+        order_book = client.get_order_book(instrument_id="ETH-USDT", book_depth=5)
+        assert isinstance(order_book.timestamp, datetime)
+        assert len(order_book.asks) == 5
+        assert len(order_book.bids) == 5
+        for order in order_book.asks + order_book.bids:
+            assert isinstance(order.price, float)
+            assert isinstance(order.size, float)
+            assert isinstance(order.num_liquidated_orders, int)
+            assert isinstance(order.num_orders, int)
+
+    @pytest.mark.vcr()
     def test_get_trades(self, client):
         trades = client.get_trades(instrument_id="BTC-USDT", limit=5)
         assert len(trades) == 5

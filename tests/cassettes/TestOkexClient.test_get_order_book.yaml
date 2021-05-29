@@ -1,0 +1,64 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://www.okex.com/api/v5/market/books?instId=ETH-USDT&sz=5
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3WQzwrCMAyH3yXnEZJ0/bdXGT1MJyIiHrbb2LubzOLBKoUS+vWXfukG5+d8gQEI
+        OngsV620mKd1gmHcYFruixYjiAuCTpRFZN3tOkPpKul7O8Oco6TQ4vDGFv8KhmiN0OdIsQk6JIt4
+        xSlzqmmBUjo43eaPGaP8MWNksxXkLNI3DyhW+mOiY0QUztRkCL0zE0xMPvkqpX+hUqsqAQcRp9Po
+        Igd72V+rksozZAEAAA==
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 657148a4686dbfe3-MAN
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 May 2021 17:01:17 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-BrokerID:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+      cf-request-id:
+      - 0a5aabbac60000bfe3c5b15000000001
+    status:
+      code: 200
+      message: ''
+version: 1
