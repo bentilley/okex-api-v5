@@ -4,6 +4,7 @@
 # Distributed under terms of the MIT license.
 
 
+import os
 import base64
 from datetime import datetime
 import hmac
@@ -38,12 +39,11 @@ class OkexApi:
 
     def __init__(
         self,
-        api_key: Optional[str] = None,
-        passphrase: Optional[str] = None,
-        secretkey: Optional[str] = None,
+        api_key: Optional[str] = os.getenv("OKEX_API_KEY"),
+        passphrase: Optional[str] = os.getenv("OKEX_PASSPHRASE"),
+        secretkey: Optional[str] = os.getenv("OKEX_SECRET_KEY"),
         base_url: str = "www.okex.com",
     ):
-        logger.info("OKEX Client Initialised")
         if secretkey is None:
             logger.warning("Client does not have a secret key")
 
@@ -57,6 +57,7 @@ class OkexApi:
         self.secretkey = secretkey
         self.base_url = base_url
         self.protocol = "https"
+        logger.info("OKEX Client Initialised")
 
     def compile_url(self, request_path: str) -> str:
         """Create a full URI from a request path.
