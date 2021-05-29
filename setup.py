@@ -11,4 +11,5 @@ setup(
     name="okex-api-v5",
     version="0.1.0",
     packages=find_packages(include=["client", "client.*"]),
+    package_data={"client": ["py.typed"]},
 )
