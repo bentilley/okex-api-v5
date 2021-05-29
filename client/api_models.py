@@ -32,7 +32,7 @@ class CandleStick(ModelTimestampMixin):
     This is initialised from OKEX API data from candlestick returning endpoints.
 
     Args:
-        timestamp: millisecond format of Unix timestamp
+        _timestamp: Millisecond format of Unix timestamp
         open: open price of the period
         high: high price of the period
         low: low price of the period
@@ -53,7 +53,13 @@ class CandleStick(ModelTimestampMixin):
     def from_api_data(api_data: List[str]) -> "CandleStick":
         [ts, o, h, l, c, vol, vol_currency] = api_data
         return CandleStick(
-            ts, float(o), float(h), float(l), float(c), float(vol), float(vol_currency)
+            _timestamp=ts,
+            open=float(o),
+            high=float(h),
+            low=float(l),
+            close=float(c),
+            volume=float(vol),
+            volume_in_currency=float(vol_currency),
         )
 
     @cached_property
@@ -71,24 +77,29 @@ class Trade(ModelTimestampMixin):
 
     This is initialised from OKEX API data from trades returning endpoints.
 
-    Args/Returns/Raises:
-        example: Brief explanation
+    Args:
+        _timestamp: Millisecond format of Unix timestamp
+        instrument_id: Instrument ID, e.g. "BTC-USDT"
+        price: The price paid per unit of the underlying asset
+        side: "buy" or "sell"
+        size: The number of units of the asset
+        trade_id: Unique ID for the trade
     """
 
+    _timestamp: str
     instrument_id: str
     price: float
     side: str
     size: float
     trade_id: str
-    _timestamp: str
 
     @staticmethod
     def from_api_data(api_data: Dict[str, Any]) -> "Trade":
         return Trade(
-            api_data["instId"],
-            float(api_data["px"]),
-            api_data["side"],
-            float(api_data["sz"]),
-            api_data["tradeId"],
-            api_data["ts"],
+            _timestamp=api_data["ts"],
+            instrument_id=api_data["instId"],
+            price=float(api_data["px"]),
+            side=api_data["side"],
+            size=float(api_data["sz"]),
+            trade_id=api_data["tradeId"],
         )
