@@ -4,6 +4,7 @@
 # Distributed under terms of the MIT license.
 
 import pytest
+from client import OkexClient
 
 
 @pytest.fixture(scope="module")
@@ -16,3 +17,8 @@ def vcr_config():
             ("ok-access-timestamp", None),
         ],
     }
+
+
+@pytest.fixture
+def client():
+    return OkexClient()
