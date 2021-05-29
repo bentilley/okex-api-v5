@@ -192,7 +192,7 @@ class OkexApi:
 
         Args:
             instrument_type: Instrument type ("SPOT", "SWAP", "FUTURES", "OPTION")
-            underlying: Underlying asset, e.g. "BTC-USD"; only for FUTURES/SWAP/OPTION
+            underlying: Underlying asset, e.g. "BTC-USDT"; only for FUTURES/SWAP/OPTION
         """
         q = QueryParams(instType=instrument_type, uly=underlying)
         return self.get("/api/v5/market/tickers", query_params=q)
@@ -203,7 +203,7 @@ class OkexApi:
         Latest price snapshot, best bid/ask price, trading volume in last 24 hours.
 
         Args:
-            instrument_id: Instrument ID, e.g. "BTC-USD-SWAP"
+            instrument_id: Instrument ID, e.g. "BTC-USDT-SWAP"
         """
         q = QueryParams(instId=instrument_id)
         return self.get("/api/v5/market/ticker", query_params=q)
@@ -215,7 +215,7 @@ class OkexApi:
 
         Args:
             quote_currency: Quote currency Currently only an index with USD/USDT/BTC
-            instrument_id: Instrument ID, e.g. "BTC-USD"
+            instrument_id: Instrument ID, e.g. "BTC-USDT"
         """
         if quote_currency is None and instrument_id is None:
             raise TypeError("You must define one of quote_currency or instrument_id")
@@ -226,7 +226,7 @@ class OkexApi:
         """Retrieve a instrument's order book.
 
         Args:
-            instrument_id: Instrument ID, e.g. "BTC-USD"
+            instrument_id: Instrument ID, e.g. "BTC-USDT"
             book_depth: Order book depth per side. Maximum 400, e.g. 400 bids + 400 asks
         """
         q = QueryParams(instId=instrument_id, sz=book_depth)
@@ -246,7 +246,7 @@ class OkexApi:
         returned in groups based on the requested bar.
 
         Args:
-            instrument_id: Instrument ID, e.g. "BTC-USD"
+            instrument_id: Instrument ID, e.g. "BTC-USDT"
             after: Pagination of data to return records earlier than the requested ts
             before: Pagination of data to return records newer than the requested ts
             candle_size: Bar size, the default is "1m" e.g. "1m" "1H" "1D" "1W" "3M"
@@ -272,7 +272,7 @@ class OkexApi:
         """Retrieve history candlestick charts from recent years.
 
         Args:
-            instrument_id: Instrument ID, e.g. "BTC-USD"
+            instrument_id: Instrument ID, e.g. "BTC-USDT"
             after: Pagination of data to return records earlier than the requested ts
             before: Pagination of data to return records newer than the requested ts
             candle_size: Bar size, the default is "1m" e.g. "1m" "1H" "1D" "1W" "3M"
@@ -301,7 +301,7 @@ class OkexApi:
         returned in groups based on the requested bar.
 
         Args:
-            instrument_id: Instrument ID, e.g. "BTC-USD"
+            instrument_id: Instrument ID, e.g. "BTC-USDT"
             after: Pagination of data to return records earlier than the requested ts
             before: Pagination of data to return records newer than the requested ts
             candle_size: Bar size, the default is "1m" e.g. "1m" "1H" "1D" "1W" "3M"
@@ -330,7 +330,7 @@ class OkexApi:
         returned in groups based on the requested bar.
 
         Args:
-            instrument_id: Instrument ID, e.g. "BTC-USD"
+            instrument_id: Instrument ID, e.g. "BTC-USDT"
             after: Pagination of data to return records earlier than the requested ts
             before: Pagination of data to return records newer than the requested ts
             candle_size: Bar size, the default is "1m" e.g. "1m" "1H" "1D" "1W" "3M"
@@ -351,7 +351,7 @@ class OkexApi:
         """Retrieve the recent transactions of an instrument.
 
         Args:
-            instrument_id: Instrument ID, e.g. "BTC-USD"
+            instrument_id: Instrument ID, e.g. "BTC-USDT"
             limit: Number of results per request. The maximum is 100; The default is 100
         """
         q = QueryParams(instId=instrument_id, limit=limit)
