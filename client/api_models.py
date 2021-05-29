@@ -6,10 +6,17 @@
 
 from datetime import datetime
 from functools import cached_property
-from typing import List
+from typing import Any, Dict, List
 
 
-class CandleStick:
+class ModelBase:
+    @staticmethod
+    def parse_ts(timestamp: str) -> datetime:
+        # timestamp is in milliseconds -> divide by 1000 to get seconds
+        return datetime.fromtimestamp(float(timestamp) / 1000)
+
+
+class CandleStick(ModelBase):
     """Simple wrapper for candlestick data.
 
     This is initialised from OKEX API data from candlestick reurning endpoints.
@@ -38,8 +45,7 @@ class CandleStick:
         volume: float,
         volume_in_currency: float,
     ):
-        # timestamp is in milliseconds -> divide by 1000 to get seconds
-        self.timestamp = datetime.fromtimestamp(float(timestamp) / 1000)
+        self.timestamp = self.parse_ts(timestamp)
         self.open = open
         self.high = high
         self.low = low
@@ -67,3 +73,38 @@ class CandleStick:
     @cached_property
     def spread(self):
         return round(self.high - self.low, 1)
+
+
+class Trade(ModelBase):
+    def __init__(
+        self,
+        instrument_id: str,
+        price: float,
+        side: str,
+        size: float,
+        trade_id: str,
+        timestamp: str,
+    ):
+        self.instrument_id = instrument_id
+        self.price = price
+        self.side = side
+        self.size = size
+        self.trade_id = trade_id
+        self.timestamp = self.parse_ts(timestamp)
+
+    @staticmethod
+    def from_api_data(api_data: Dict[str, Any]) -> "Trade":
+        return Trade(
+            api_data["instId"],
+            float(api_data["px"]),
+            api_data["side"],
+            float(api_data["sz"]),
+            api_data["tradeId"],
+            api_data["ts"],
+        )
+
+    def __repr__(self):
+        return (
+            f"<Trade id:{self.instrument_id} ts:{self.timestamp} "
+            f"side:{self.side} px:{self.price} sz:{self.size}"
+        )
