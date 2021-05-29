@@ -1,0 +1,64 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://www.okex.com/api/v5/market/trades?instId=BTC-USDT&limit=5
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA5WRuQ7CMAxA/8VzqXI2uCOwMFMmxFBohZDKIRIkoOq/43QiLVcz2Y7tl6fUsD0V
+        JaTAIIKD3VFEQZG7HNJVDfujdfOCipNsOlouZhld2n07sLneffLwszGjwxPkVDnfqCKV4iKWlLpL
+        XpTtCo5GodLSNzlLTTwRQjKBRjKN0ERfcbasqg4PBb7yzAeeN+vyhP7FC/U4+Rkd0pTf27VrnxTS
+        BLKBtL9A457WcBBjqMNPS+L3WqZH44iktW6eSqxW8kICAAA=
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6570d5dccb32e5a3-MAN
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 May 2021 15:42:55 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-BrokerID:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+      cf-request-id:
+      - 0a5a63fdf90000e5a3a4262000000001
+    status:
+      code: 200
+      message: ''
+version: 1

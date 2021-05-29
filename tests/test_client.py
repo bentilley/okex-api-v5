@@ -25,3 +25,15 @@ class TestOkexClient:
             assert isinstance(candlestick.close, float)
             assert isinstance(candlestick.volume, float)
             assert isinstance(candlestick.volume_in_currency, float)
+
+    @pytest.mark.vcr()
+    def test_get_trades(self, client):
+        trades = client.get_trades(instrument_id="BTC-USDT", limit=5)
+        assert len(trades) == 5
+        for trade in trades:
+            assert isinstance(trade.instrument_id, str)
+            assert isinstance(trade.timestamp, datetime)
+            assert isinstance(trade.price, float)
+            assert trade.side == "sell" or trade.side == "buy"
+            assert isinstance(trade.size, float)
+            assert isinstance(trade.trade_id, str)
