@@ -39,6 +39,7 @@ class TestOkexClient:
         data = client.get_account_balance()
         assert data
 
+    @pytest.mark.vcr()
     def test_get_candlesticks(self, client):
         candlesticks = client.get_candlesticks(instrument_id="XCH-USDT", limit=5)
         assert len(candlesticks) == 5

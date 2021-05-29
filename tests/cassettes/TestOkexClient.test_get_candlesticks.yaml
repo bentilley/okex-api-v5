@@ -1,0 +1,68 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://www.okex.com/api/v5/market/candles?instId=XCH-USDT&limit=5
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA1XQwW7DMAgG4HfxuULwYwzuq1Q9VOu009RDd5v67sWxlWU5GGLsL5Df8vG4f5Zz
+        4XIq38+vzDK5335u5Xy5FGmAstTgfLLgwVS3KGP1vvYiowQhWvRRl4rWSaKqt3I9/UE4QL5d3qCd
+        nbwSixiQB6AmxN7d4whp2yGhcc5DyLbI651pdKXUwtRHCeFBhhrQf9SQ5nBCuqjVG83u5idArXOV
+        sQVhEKznuEcKdacmtLiJ5iqdLIzzp2Ruik4N5sjRrq83klY0e4sBAAA=
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6570b27d4fa054a5-MAN
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 29 May 2021 15:18:46 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - '0'
+      OK-AFTER:
+      - '1622301240000'
+      OK-BEFORE:
+      - '1622301480000'
+      Pragma:
+      - no-cache
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-BrokerID:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+      cf-request-id:
+      - 0a5a4de249000054a58bae9000000001
+    status:
+      code: 200
+      message: ''
+version: 1
