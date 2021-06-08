@@ -64,11 +64,11 @@ class CandleStick(ModelTimestampMixin):
 
     @cached_property
     def change(self):
-        return round(self.close - self.open, 1)
+        return round(self.close - self.open, 2)
 
     @cached_property
     def spread(self):
-        return round(self.high - self.low, 1)
+        return round(self.high - self.low, 2)
 
 
 @dataclass
