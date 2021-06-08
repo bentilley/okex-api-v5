@@ -7,3 +7,4 @@
 from .api import OkexApi
 from .client import OkexClient
 from .ws import OkexWebsocketsApi
+from .wsclient import OkexWebsocketsClient
