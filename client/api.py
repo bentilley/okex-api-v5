@@ -171,6 +171,19 @@ class OkexApi:
         """Perform a GET request."""
         return self.make_request("GET", request_path, query_params=query_params)
 
+    ####################
+    # Account Endpoints#
+    ####################
+
+    def get_account_and_position_risk(self, instrument_type: Optional[str] = None):
+        """Get account and position risk.
+
+        Args:
+            instrument_type: Instrument type ("MARGIN", "SWAP", "FUTURES", "OPTION")
+        """
+        q = QueryParams(instType=instrument_type)
+        return self.get("/api/v5/account/account-position-risk", query_params=q)
+
     def get_account_balance(self, currencies: Optional[List[str]] = None) -> Dict:
         """Get summary of account balance for different currencies.
 
@@ -178,10 +191,128 @@ class OkexApi:
         asset class.
 
         Args:
-            currencies: currencies to fetch balance for.
+            currencies: Currencies to fetch balance for.
         """
         q = QueryParams(ccy=currencies)
         return self.get("/api/v5/account/balance", query_params=q)
+
+    def get_positions(
+        self,
+        instrument_type: Optional[str] = None,
+        instrument_id: Optional[str] = None,
+        position_ids: Optional[List[str]] = None,
+    ):
+        """Get information on your positions.
+
+        When the account is in net mode, net positions will be displayed, and
+        when the account is in long/short mode, long or short positions will be
+        displayed. See `set_position_mode`.
+
+        Args:
+            instrument_type: Instrument type ("MARGIN", "SWAP", "FUTURES", "OPTION")
+            instrument_id: Instrument ID, e.g. "BTC-USDT"
+            position_ids: Position IDs (no more than 20)
+        """
+        q = QueryParams(
+            instType=instrument_type, instId=instrument_id, posId=position_ids
+        )
+        return self.get("/api/v5/account/positions", query_params=q)
+
+    def get_bills_details(
+        self,
+        instrument_type: Optional[str] = None,
+        currency: Optional[str] = None,
+        margin_mode: Optional[str] = None,
+        contract_type: Optional[str] = None,
+        bill_type: Optional[int] = None,
+        bill_subtype: Optional[int] = None,
+        after: Optional[str] = None,
+        before: Optional[str] = None,
+        limit: Optional[int] = None,
+    ):
+        """Get the bills of the account.
+
+        The bill refers to all transaction records that result in changing the
+        balance of an account. Pagination is supported, and the response is
+        sorted with the most recent first. This endpoint can retrieve data from
+        the last 7 days.
+
+        Args:
+            instrument_type: Instrument type ("MARGIN", "SWAP", "FUTURES", "OPTION")
+            currency: Currency to display bills for
+            margin_mode: "isolated" or "cross"
+            contract_type: "linear" or "inverse" (only applicable to FUTURE/SWAP)
+            bill_type: The type of bill (see Bill Types)
+            bill_subtype: The subtype of bill (see Bill Subtypes)
+            after: only return results after the requested bill ID
+            before: only return results before the requested bill ID
+            limit: Number of results per request. Maximum 100; Default 100.
+
+        Bill Type:
+                1: Transfer
+                2: Trade
+                3: Delivery
+                4: Auto token conversion
+                5: Liquidation
+                6: Margin transfer
+                7: Interest deduction
+                8: Funding rate
+                9: ADL
+                10: Clawback
+                11: System token conversion
+
+        Bill Subtype:
+                1: Buy
+                2: Sell
+                3: Open long
+                4: Open short
+                5: Close long
+                6: Close short
+                9: Interest deduction
+                11: Transfer in
+                12: Transfer out
+                160: Manual margin increase
+                161: Manual margin decrease
+                162: Auto margin increase
+                110: Auto buy
+                111: Auto sell
+                118: System token conversion transfer in
+                119: System token conversion transfer out
+                100: Partial liquidation close long
+                101: Partial liquidation close short
+                102: Partial liquidation buy
+                103: Partial liquidation sell
+                104: Liquidation long
+                105: Liquidation short
+                106: Liquidation buy
+                107: Liquidation sell
+                110: Liquidation transfer in
+                111: Liquidation transfer out
+                125: ADL close long
+                126: ADL close short
+                127: ADL buy
+                128: ADL sell
+                170: Exercised
+                171: Counterparty exercised
+                172: Expired OTM
+                112: Delivery long
+                113: Delivery short
+                117: Delivery/Exercise clawback
+                173: Funding fee expense
+                174: Funding fee income
+        """
+        q = QueryParams(
+            instType=instrument_type,
+            ccy=currency,
+            mgnMode=margin_mode,
+            ctType=contract_type,
+            type=bill_type,
+            subType=bill_subtype,
+            after=after,
+            before=before,
+            limit=limit,
+        )
+        return self.get("/api/v5/account/bills", query_params=q)
 
     #########################
     # Market Data Endpoints #
