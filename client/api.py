@@ -183,6 +183,10 @@ class OkexApi:
         q = QueryParams(ccy=currencies)
         return self.get("/api/v5/account/balance", query_params=q)
 
+    #########################
+    # Market Data Endpoints #
+    #########################
+
     def get_tickers(
         self, instrument_type: str = "SPOT", underlying: Optional[str] = None
     ) -> Dict:
@@ -238,7 +242,7 @@ class OkexApi:
         after: Optional[str] = None,
         before: Optional[str] = None,
         candle_size: Optional[str] = None,
-        limit: Optional[str] = None,
+        limit: Optional[int] = None,
     ) -> Dict:
         """Retrieve the candlestick charts.
 
@@ -267,7 +271,7 @@ class OkexApi:
         after: Optional[str] = None,
         before: Optional[str] = None,
         candle_size: Optional[str] = None,
-        limit: Optional[str] = None,
+        limit: Optional[int] = None,
     ):
         """Retrieve history candlestick charts from recent years.
 
@@ -293,7 +297,7 @@ class OkexApi:
         after: Optional[str] = None,
         before: Optional[str] = None,
         candle_size: Optional[str] = None,
-        limit: Optional[str] = None,
+        limit: Optional[int] = None,
     ):
         """Retrieve the candlestick charts of the index.
 
@@ -322,7 +326,7 @@ class OkexApi:
         after: Optional[str] = None,
         before: Optional[str] = None,
         candle_size: Optional[str] = None,
-        limit: Optional[str] = None,
+        limit: Optional[int] = None,
     ):
         """Retrieve the candlestick charts of mark price.
 
@@ -346,13 +350,13 @@ class OkexApi:
         return self.get("/api/v5/market/mark-price-candles", query_params=q)
 
     def get_trades(
-        self, instrument_id: Optional[str] = None, limit: Optional[str] = None
+        self, instrument_id: Optional[str] = None, limit: Optional[int] = None
     ):
         """Retrieve the recent transactions of an instrument.
 
         Args:
             instrument_id: Instrument ID, e.g. "BTC-USDT"
-            limit: Number of results per request. The maximum is 100; The default is 100
+            limit: Number of results per request. Maximum 100; Default 100.
         """
         q = QueryParams(instId=instrument_id, limit=limit)
         return self.get("/api/v5/market/trades", query_params=q)
