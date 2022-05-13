@@ -5,6 +5,7 @@
 
 import pytest
 from client import OkexClient
+from client import OkexWebsocketsClient
 
 
 @pytest.fixture(scope="module")
@@ -22,3 +23,8 @@ def vcr_config():
 @pytest.fixture
 def client():
     return OkexClient()
+
+
+@pytest.fixture
+def ws_api():
+    return OkexWebsocketsClient()
