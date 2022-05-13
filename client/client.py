@@ -14,6 +14,11 @@ class OkexClient(OkexApi):
         data = response["data"]
         return list(map(CandleStick.from_api_data, data))
 
+    def get_candlesticks_history(self, **query_params):
+        response = super().get_candlesticks_history(**query_params)
+        data = response["data"]
+        return list(map(CandleStick.from_api_data, data))
+
     def get_order_book(self, **query_params):
         response = super().get_order_book(**query_params)
         data = response["data"]

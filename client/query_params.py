@@ -3,6 +3,8 @@
 #
 # Distributed under terms of the MIT license.
 
+from datetime import datetime
+
 
 CANDLE_SIZES = [
     "1m",
@@ -35,17 +37,24 @@ class QueryParams(dict):
                 raise KeyError(f"QueryParams does not support {key}")
             self[key] = getattr(self, key)(value)
 
+    @staticmethod
+    def assert_timestamp(ts):
+        if isinstance(ts, str):
+            ts = int(ts)
+        d = datetime.utcfromtimestamp(ts / 1000)
+        if d >= datetime(1970, 1, 1):
+            return ts
+        raise ValueError(f"{ts} is not a valid timestamp (should be UNIX milliseconds")
+
     def after(self, after):
-        # assert is time stamp
-        raise Exception("need to implements")
+        return self.assert_timestamp(after)
 
     def bar(self, candle_size):
         assert candle_size in CANDLE_SIZES
         return candle_size
 
     def before(self, before):
-        # assert is time stamp
-        raise Exception("need to implements")
+        return self.assert_timestamp(before)
 
     def ccy(self, currencies):
         return ",".join(currencies)
