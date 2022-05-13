@@ -314,6 +314,54 @@ class OkexApi:
         )
         return self.get("/api/v5/account/bills", query_params=q)
 
+    # def get_bills_details_archive(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
+    # def get_account_config(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
+    # def set_position_mode(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
+    # def set_leverage(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
+    # def get_max_open_amount(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
+    # def get_max_available_amount(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
+    # def get_leverage(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
+    # def get_fee_rates(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
+    # def get_interest_accrued(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
+    # def get_interest_rate(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
+    # def set_greeks_display_type(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
+    # def get_max_withdrawals(self, instrument_type: str):
+    #     q = QueryParams(instType=instrument_type, uly=underlying)
+    #     return self.get("/api/v5/market/tickers", query_params=q)
+
     #########################
     # Market Data Endpoints #
     #########################
